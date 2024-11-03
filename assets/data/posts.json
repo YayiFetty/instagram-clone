@@ -1,0 +1,115 @@
+{
+  "posts":[
+  {
+    "id": "1",
+    "username": "user_1",
+    "location": "Tokyo, Japan",
+    "imageUrl": "https://picsum.photos/400/500?random=1",
+    "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
+    "isVerified": false,
+    "likes": 34474,
+    "caption": "This is a sample caption for post number 1",
+    "likedBy": "jane_doe"
+  },
+  {
+    "id": "2",
+    "username": "user_2",
+    "location": "Tokyo, Japan",
+    "imageUrl": "https://picsum.photos/400/500?random=2",
+    "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
+    "isVerified": false,
+    "likes": 30044,
+    "caption": "This is a sample caption for post number 2",
+    "likedBy": "emma_stone"
+  },
+  {
+    "id": "3",
+    "username": "user_3",
+    "location": "Tokyo, Japan",
+    "imageUrl": "https://picsum.photos/400/500?random=3",
+    "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
+    "isVerified": true,
+    "likes": 45143,
+    "caption": "This is a sample caption for post number 3",
+    "likedBy": "craig_love"
+  },
+  {
+    "id": "4",
+    "username": "user_4",
+    "location": "Paris, France",
+    "imageUrl": "https://picsum.photos/400/500?random=4",
+    "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
+    "isVerified": false,
+    "likes": 25559,
+    "caption": "This is a sample caption for post number 4",
+    "likedBy": "jane_doe"
+  },
+  {
+    "id": "5",
+    "username": "user_5",
+    "location": "Tokyo, Japan",
+    "imageUrl": "https://picsum.photos/400/500?random=5",
+    "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
+    "isVerified": false,
+    "likes": 22913,
+    "caption": "This is a sample caption for post number 5",
+    "likedBy": "john_doe"
+  },
+  {
+    "id": "6",
+    "username": "user_6",
+    "location": "London, UK",
+    "imageUrl": "https://picsum.photos/400/500?random=6",
+    "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
+    "isVerified": true,
+    "likes": 3234,
+    "caption": "This is a sample caption for post number 6",
+    "likedBy": "jane_doe"
+  },
+  {
+    "id": "7",
+    "username": "user_7",
+    "location": "London, UK",
+    "imageUrl": "https://picsum.photos/400/500?random=7",
+    "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
+    "isVerified": true,
+    "likes": 14669,
+    "caption": "This is a sample caption for post number 7",
+    "likedBy": "emma_stone"
+  },
+  {
+    "id": "8",
+    "username": "user_8",
+    "location": "New York, USA",
+    "imageUrl": "https://picsum.photos/400/500?random=8",
+    "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
+    "isVerified": true,
+    "likes": 39134,
+    "caption": "This is a sample caption for post number 8",
+    "likedBy": "emma_stone"
+  },
+  {
+    "id": "9",
+    "username": "user_9",
+    "location": "London, UK",
+    "imageUrl": "https://picsum.photos/400/500?random=9",
+    "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
+    "isVerified": false,
+    "likes": 42103,
+    "caption": "This is a sample caption for post number 9",
+    "likedBy": "john_doe"
+  },
+  {
+    "id": "10",
+    "username": "user_10",
+    "location": "Tokyo, Japan",
+    "imageUrl": "https://picsum.photos/400/500?random=10",
+    "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
+    "isVerified": true,
+    "likes": 17626,
+    "caption": "This is a sample caption for post number 10",
+    "likedBy": "john_doe"
+  }
+]
+
+}
