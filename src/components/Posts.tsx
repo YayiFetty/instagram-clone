@@ -1,27 +1,54 @@
-import { FlatList, View } from "react-native";
-import React from "react";
-
-import posts from "@/assets/data/posts.json";
+import { ActivityIndicator, FlatList, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import PostsCard from "./PostsCard";
+import { api } from "../config/api";
 
 export default function Posts() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const renderItems = ({item}:{item:Post}) => {
-        return (
-            <PostsCard
-                key={item.id}
-                imageDp={item.imageDp}
-                username={item.username}
-                isVerified={item.isVerified}
-                location={item.location}
-            />
-        );
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = async () => {
+    try {
+      setIsLoading(true);
+      const response = await api.get('/posts');
+     // Log the full response
+      const postsData = response.data.posts || response.data
+      
+      console.log("postsData", postsData)
+      setPosts(postsData);
+    } catch (err) {
+      console.error("Error fetching:", err);
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const renderItems = ({ item }: { item: Post }) => {
+    return (
+      <PostsCard
+        imageDp={item.imageDp}
+        username={item.username}
+        isVerified={item.isVerified}
+        location={item.location}
+      />
+    );
+  };
+
+  if (isLoading) {
+    return <ActivityIndicator size="large" color="yellow" />;
+  }
+
   return (
-    <View className="flex-1 px-4 py-2">
+    <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 8 }}>
       <FlatList
-      data={posts}
-      renderItem={renderItems}/>
+        keyExtractor={(item) => item.id.toString()}
+        data={posts}
+        renderItem={renderItems}
+      />
     </View>
   );
 }

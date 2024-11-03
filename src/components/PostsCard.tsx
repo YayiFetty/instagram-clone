@@ -5,7 +5,7 @@ import { BadgeCheck } from 'lucide-react-native'
 const PostsCard = ({imageDp, imageUrl, username, isVerified, location}:Post) => {
   return (
     <View>
-      <View>
+      <View className='flex flex-row'>
       <LinearGradient
         colors={["#f09433", "#e6683c", "#dc2743", "#cc2366", "#bc1888"]}
         style={{
@@ -29,7 +29,7 @@ const PostsCard = ({imageDp, imageUrl, username, isVerified, location}:Post) => 
         </View>
       </LinearGradient>
 
-      <View>
+      <View className='flex-col justify-center'>
       <View>
         <Text>{username}</Text>
         {

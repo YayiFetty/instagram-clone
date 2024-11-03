@@ -4,8 +4,7 @@ type Story = {
     username:string;
     isLive: boolean;
 }
-
-type Post = {
+interface Post {
     id: string;
     username: string;
     location: string;
@@ -15,4 +14,4 @@ type Post = {
     likes: number;
     caption: string;
     likedBy: string;
-  };
+  }
