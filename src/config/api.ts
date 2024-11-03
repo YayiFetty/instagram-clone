@@ -1,11 +1,9 @@
-// src/config/api.ts
-
 import axios from 'axios';
 import { Platform } from 'react-native';
 
 export const getApiBaseUrl = () => {
   // Get the local IP address of your computer
-  const localIp = '192.168.1.100'; // Replace with your actual local IP address
+  const localIp = '192.168.90.1'; 
   
   if (__DEV__) {
     if (Platform.OS === 'android') {
@@ -28,10 +26,10 @@ export const getApiBaseUrl = () => {
   return 'https://your-production-api.com';
 };
 
-// Usage example for axios
+
 export const api = axios.create({
   baseURL: getApiBaseUrl(),
-  timeout: 10000,
+  timeout: 1000,
   headers: {
     'Content-Type': 'application/json',
   },
