@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import CustomHeader from '../../components/CustomHeader'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -9,8 +9,10 @@ export default function FeedScreen() {
   return (
     <SafeAreaView className='flex-1 space-y-1 bg-white'>
        <CustomHeader/>
-       <Stories/>
-       <Posts/>
+      <ScrollView>
+      <Stories/>
+      <Posts/>
+      </ScrollView>
     </SafeAreaView>
   )
 }

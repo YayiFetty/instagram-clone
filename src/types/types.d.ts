@@ -5,13 +5,13 @@ type Story = {
     isLive: boolean;
 }
 interface Post {
-    id: string;
+    id: number;
+    imageDp: string;
     username: string;
+    isVerified: boolean;
     location: string;
     imageUrl: string;
-    imageDp: string;
-    isVerified: boolean;
+    likedBy: string;
     likes: number;
     caption: string;
-    likedBy: string;
   }
