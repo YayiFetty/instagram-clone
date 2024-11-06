@@ -1,9 +1,12 @@
+// Story interface
 type Story = {
     id: string;
     imageUrl: string;
-    username:string;
+    username: string;
     isLive: boolean;
-}
+};
+
+// Post interface
 interface Post {
     id: number;
     imageDp: string;
@@ -14,4 +17,5 @@ interface Post {
     likedBy: string;
     likes: number;
     caption: string;
-  }
+    createdAt?: string; // Optional createdAt field
+}

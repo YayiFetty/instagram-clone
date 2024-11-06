@@ -53,6 +53,7 @@ export default function Posts() {
         likedBy={item.likedBy}
         likes={item.likes}
         caption={item.caption}
+        createdAt={item.createdAt}
       />
     );
   };
