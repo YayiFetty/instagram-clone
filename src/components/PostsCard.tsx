@@ -12,7 +12,7 @@ import {
 import moment from "moment";
 const PostsCard = ({
   imageDp,
-  imageUrl,
+  mediaUrl,
   username,
   isVerified,
   location,
@@ -20,6 +20,7 @@ const PostsCard = ({
   likes,
   caption,
   createdAt,
+  mediaType
 }: Post) => {
   const [timePosted, setTimePosted] = useState("");
 
@@ -54,31 +55,37 @@ const PostsCard = ({
       <View className="flex flex-row items-center justify-between px-4 my-2  ">
         {/* for the Dp / username / location */}
         <View className="flex flex-row justify-start gap-3 ">
-          <LinearGradient
-            colors={["#f09433", "#e6683c", "#dc2743", "#cc2366", "#bc1888"]}
+        <LinearGradient
+        colors={["#f09433", "#e6683c", "#dc2743", "#cc2366", "#bc1888"]}
+        style={{
+          width: 54,
+          height: 54,
+          borderRadius: 27,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <View style={{
+          width: 50,
+          height: 50,
+          borderRadius: 25,
+          alignItems: "center",
+          backgroundColor: "#fff",
+          justifyContent: "center",
+        }}>
+          <View
             style={{
-              width: 50,
-              height: 50,
-              borderRadius: 25,
-              alignItems: "center",
-              justifyContent: "center",
+              width: 46,
+              height: 46,
+              borderRadius: 23,
+              overflow: "hidden",
+              backgroundColor: "white", // background to separate image from gradient border
             }}
           >
-            <View
-              style={{
-                width: 44,
-                height: 44,
-                borderRadius: 22,
-                overflow: "hidden",
-                backgroundColor: "white", // background to separate image from gradient border
-              }}
-            >
-              <Image
-                source={{ uri: imageDp }}
-                style={{ width: "100%", height: "100%" }}
-              />
-            </View>
-          </LinearGradient>
+            <Image source={{ uri: imageDp }} style={{ width: "100%", height: "100%" }} />
+          </View>
+        </View>
+      </LinearGradient>
 
           {/* foor the username and verification */}
           <View className="flex-col items-start justify-center">
@@ -99,7 +106,7 @@ const PostsCard = ({
 
       <View className="aspect-square">
         <Image
-          source={{ uri: imageUrl }}
+          source={{ uri: mediaUrl }}
           style={{ width: "100%", height: "100%" }}
         />
       </View>
@@ -142,7 +149,7 @@ const PostsCard = ({
 
       <View className="px-4 flex-row gap-2">
         <Text className="text-sm font-semibold">{username}</Text>
-        <Text className="text sm">{caption}</Text>
+        <Text className="text-sm">{caption}</Text>
       </View>
       {/* view all comments */}
       <View className="px-4">

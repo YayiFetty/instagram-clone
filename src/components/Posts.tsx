@@ -49,7 +49,8 @@ export default function Posts() {
         username={item.username}
         isVerified={item.isVerified}
         location={item.location}
-        imageUrl={item.imageUrl}
+        mediaUrl={item.mediaUrl}
+        mediaType={item.mediaType}
         likedBy={item.likedBy}
         likes={item.likes}
         caption={item.caption}

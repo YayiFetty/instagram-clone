@@ -6,14 +6,15 @@ type Story = {
     isLive: boolean;
 };
 
-// Post interface
+// Post interface with media type differentiation
 interface Post {
     id: number;
     imageDp: string;
     username: string;
     isVerified: boolean;
     location: string;
-    imageUrl: string;
+    mediaUrl: string; // URL for image or video
+    mediaType: 'image' | 'video'; // Media type: 'image' or 'video'
     likedBy: string;
     likes: number;
     caption: string;
