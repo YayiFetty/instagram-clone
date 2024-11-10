@@ -1,11 +1,16 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 
 const StoriesCard = ({ username, imageUrl, isLive }: Story) => {
+  const clickStory = () => {
+    router.push("/home/storyscreen")
+  }
   return (
     <View className="relative h-fit" style={{ alignItems: "center", marginHorizontal: 8 }}>
-      <LinearGradient
+     <TouchableOpacity onPress={clickStory}>
+     <LinearGradient
         colors={["#f09433", "#e6683c", "#dc2743", "#cc2366", "#bc1888"]}
         style={{
           width: 54,
@@ -44,6 +49,7 @@ const StoriesCard = ({ username, imageUrl, isLive }: Story) => {
           <Text style={{ color: "red", fontSize: 12, backgroundColor: "rgba(255, 255, 255, 0.8)", paddingHorizontal: 4, paddingVertical: 2, borderRadius: 4 }}>Live</Text>
         </View>
       )}
+     </TouchableOpacity>
     </View>
   );
 };

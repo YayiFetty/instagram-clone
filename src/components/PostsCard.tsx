@@ -1,28 +1,29 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
-import { LinearGradient } from "expo-linear-gradient";
+import React, { useEffect, useState, useRef } from "react";
 import {
-  BadgeCheck,
   Bookmark,
-  EllipsisVertical,
   ExternalLink,
   Heart,
   MessageCircle,
 } from "lucide-react-native";
 import moment from "moment";
+import PostHeader from "./PostHeader";
+import { ResizeMode, Video } from "expo-av"; // Import Video component from expo-av
+
 const PostsCard = ({
   imageDp,
   mediaUrl,
   username,
-  isVerified,
-  location,
   likedBy,
+  isVerified,
   likes,
+  location,
   caption,
   createdAt,
-  mediaType
+  mediaType,
 }: Post) => {
   const [timePosted, setTimePosted] = useState("");
+  const videoRef = useRef(null); // Ref to control video playback
 
   const getTimePosted = () => {
     const now = moment();
@@ -37,7 +38,11 @@ const PostsCard = ({
     if (daysDiff >= 1) return `${daysDiff}d ago`;
     if (hoursDiff >= 1) return `${hoursDiff}h ago`;
 
-    return minsDiff <= 0 ? "Just now" : minsDiff === 1 ? `${minsDiff} min ago`:`${minsDiff}mins ago`;
+    return minsDiff <= 0
+      ? "Just now"
+      : minsDiff === 1
+      ? `${minsDiff} min ago`
+      : `${minsDiff} mins ago`;
   };
 
   useEffect(() => {
@@ -51,79 +56,56 @@ const PostsCard = ({
   }, [createdAt]);
 
   return (
-    <View className="flex-1 flex-col  w-full">
-      <View className="flex flex-row items-center justify-between px-4 my-2  ">
-        {/* for the Dp / username / location */}
-        <View className="flex flex-row justify-start gap-3 ">
-        <LinearGradient
-        colors={["#f09433", "#e6683c", "#dc2743", "#cc2366", "#bc1888"]}
-        style={{
-          width: 54,
-          height: 54,
-          borderRadius: 27,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <View style={{
-          width: 50,
-          height: 50,
-          borderRadius: 25,
-          alignItems: "center",
-          backgroundColor: "#fff",
-          justifyContent: "center",
-        }}>
-          <View
-            style={{
-              width: 46,
-              height: 46,
-              borderRadius: 23,
-              overflow: "hidden",
-              backgroundColor: "white", // background to separate image from gradient border
-            }}
-          >
-            <Image source={{ uri: imageDp }} style={{ width: "100%", height: "100%" }} />
+    <View className="flex-1 flex-col w-full">
+      {/* Post header inside video or outside image */}
+      {mediaType === "video" ? (
+        <View className=" relative aspect-[16/9]">
+          <View className="absolute top-0 left-0 right-0 z-10">
+            <PostHeader
+              isVerified={isVerified}
+              location={location}
+              username={username}
+              imageDp={imageDp}
+            />
           </View>
+          <Video
+            ref={videoRef}
+            source={ require ("../../assets/trtr.mp4") }
+            style={{ width: "100%", height: "100%" }}
+            resizeMode={ResizeMode.COVER}
+            shouldPlay={true}
+            isLooping={true}
+          />
         </View>
-      </LinearGradient>
-
-          {/* foor the username and verification */}
-          <View className="flex-col items-start justify-center">
-            <View className="flex-row gap-2">
-              <Text className=" text-xl font-bold leading-5">{username}</Text>
-              {isVerified && <BadgeCheck size={20} color="blue" />}
-            </View>
-            <Text>{location}</Text>
-          </View>
-        </View>
-        {/* for the more icon */}
+      ) : (
         <View>
-          <EllipsisVertical size={25} color="#000" />
+          <PostHeader
+            isVerified={isVerified}
+            location={location}
+            username={username}
+            imageDp={imageDp}
+          />
+          {/* Post Image */}
+          <View className="aspect-[4/3]">
+            <Image
+              source={{ uri: mediaUrl }}
+              style={{ width: "100%", height: "90%" }}
+            />
+          </View>
         </View>
-      </View>
+      )}
 
-      {/* Post Image */}
-
-      <View className="aspect-square">
-        <Image
-          source={{ uri: mediaUrl }}
-          style={{ width: "100%", height: "100%" }}
-        />
-      </View>
-
-      {/* likes comment share bookmark */}
-      <View className="flex flex-row  justify-between items-center my-2 px-4">
+      {/* Likes, comments, share, bookmark */}
+      <View className="flex flex-row justify-between items-center my-2 px-4">
         <View className="flex-row gap-3">
           <TouchableOpacity className="flex-row items-center gap-1">
             <Heart size={25} color="#000" />
-            <Text className=" text-[11px]">{likes}</Text>
+            <Text className="text-[11px]">{likes}</Text>
           </TouchableOpacity>
-
           <TouchableOpacity className="flex-row items-center gap-1">
             <MessageCircle size={25} color="#000" />
-            <Text className=" text-[11px]">5</Text>
+            <Text className="text-[11px]">5</Text>
           </TouchableOpacity>
-
           <TouchableOpacity>
             <ExternalLink size={25} color="#000" />
           </TouchableOpacity>
@@ -135,8 +117,7 @@ const PostsCard = ({
         </View>
       </View>
 
-      {/* liked by */}
-
+      {/* Liked by section */}
       <View className="px-4">
         <Image source={{ uri: imageDp }} />
         <View className="flex-row gap-1">
@@ -145,19 +126,19 @@ const PostsCard = ({
         </View>
       </View>
 
-      {/* username and caption */}
-
+      {/* Username and caption */}
       <View className="px-4 flex-row gap-2">
         <Text className="text-sm font-semibold">{username}</Text>
         <Text className="text-sm">{caption}</Text>
       </View>
-      {/* view all comments */}
-      <View className="px-4">
+
+      {/* View all comments */}
+      <View className="px-4 mb-3">
         <TouchableOpacity>
-          <Text className=" text-gray-500">View all comments</Text>
+          <Text className="text-gray-500">View all comments</Text>
         </TouchableOpacity>
 
-        {/* dates */}
+        {/* Time posted */}
         <View>
           <Text>{timePosted}</Text>
         </View>
