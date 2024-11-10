@@ -3,12 +3,12 @@ import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 
-const StoriesCard = ({ username, imageUrl, isLive }: Story) => {
+const StoriesCard = ({ id, username, imageUrl, isLive }: Story) => {
   const clickStory = () => {
     router.push("/home/storyscreen")
   }
   return (
-    <View className="relative h-fit" style={{ alignItems: "center", marginHorizontal: 8 }}>
+    <View className="relative h-fit" style={{ alignItems: "center", marginHorizontal: 8 }} id={id}>
      <TouchableOpacity onPress={clickStory}>
      <LinearGradient
         colors={["#f09433", "#e6683c", "#dc2743", "#cc2366", "#bc1888"]}

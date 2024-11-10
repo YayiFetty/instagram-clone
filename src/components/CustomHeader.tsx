@@ -11,12 +11,16 @@ const CustomHeader = () => {
   }
   return (
     <View className='flex-row justify-between items-center px-4 py-2 border-b border-gray-200'>
-      <TouchableWithoutFeedback>
+      
         <View className='flex-row items-end'>
-          <Text className='text-3xl'>Instagram</Text>
-          <ChevronDown size={20} color="#000" /> {/* Change color as needed */}
+         <TouchableOpacity>
+         <Text className='text-3xl'>Instagram</Text>
+         </TouchableOpacity>
+         <TouchableOpacity>
+         <ChevronDown size={20} color="#000" /> 
+         </TouchableOpacity>
         </View>
-      </TouchableWithoutFeedback>
+    
 
       <View className='flex-row gap-4'>
         <TouchableOpacity>

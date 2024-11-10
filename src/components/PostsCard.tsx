@@ -89,7 +89,7 @@ const PostsCard = ({
           <View className="aspect-[4/3]">
             <Image
               source={{ uri: mediaUrl }}
-              style={{ width: "100%", height: "90%" }}
+              style={{ width: "100%", height: "100%" }}
             />
           </View>
         </View>
