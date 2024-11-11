@@ -9,6 +9,8 @@ import {
 import moment from "moment";
 import PostHeader from "./PostHeader";
 import { ResizeMode, Video } from "expo-av"; // Import Video component from expo-av
+import { router } from "expo-router";
+import CommentModal from "./CommentModal";
 
 const PostsCard = ({
   imageDp,
@@ -21,10 +23,12 @@ const PostsCard = ({
   caption,
   createdAt,
   mediaType,
+  onCommentPress,
 }: Post) => {
   const [timePosted, setTimePosted] = useState("");
   const videoRef = useRef(null); // Ref to control video playback
-
+  const [commentOpen, setCommentOpen] = useState(false)
+  
   const getTimePosted = () => {
     const now = moment();
     const posted = moment(createdAt);
@@ -55,8 +59,10 @@ const PostsCard = ({
     return () => clearInterval(interval);
   }, [createdAt]);
 
+
+
   return (
-    <View className="flex-1 flex-col w-full">
+    <View className="flex-1 flex-col relative w-full">
       {/* Post header inside video or outside image */}
       {mediaType === "video" ? (
         <View className=" relative aspect-[16/9]">
@@ -102,7 +108,7 @@ const PostsCard = ({
             <Heart size={25} color="#000" />
             <Text className="text-[11px]">{likes}</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-row items-center gap-1">
+          <TouchableOpacity onPress={onCommentPress} className="flex-row items-center gap-1">
             <MessageCircle size={25} color="#000" />
             <Text className="text-[11px]">5</Text>
           </TouchableOpacity>
@@ -115,6 +121,7 @@ const PostsCard = ({
             <Bookmark size={25} color="#000" />
           </TouchableOpacity>
         </View>
+      
       </View>
 
       {/* Liked by section */}
@@ -143,6 +150,13 @@ const PostsCard = ({
           <Text>{timePosted}</Text>
         </View>
       </View>
+
+        {/* comment modal */}
+      
+        {
+          commentOpen && (<CommentModal isVisible={commentOpen} onClose = {() => setCommentOpen(false)}/>)
+        }
+        
     </View>
   );
 };
