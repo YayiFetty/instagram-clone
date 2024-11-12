@@ -10,7 +10,7 @@ import moment from "moment";
 import PostHeader from "./PostHeader";
 import { ResizeMode, Video } from "expo-av"; // Import Video component from expo-av
 import { router } from "expo-router";
-import CommentModal from "./CommentModal";
+import CommentModal from "../Comment/CommentModal";
 
 const PostsCard = ({
   imageDp,
@@ -27,7 +27,6 @@ const PostsCard = ({
 }: Post) => {
   const [timePosted, setTimePosted] = useState("");
   const videoRef = useRef(null); // Ref to control video playback
-  const [commentOpen, setCommentOpen] = useState(false)
   
   const getTimePosted = () => {
     const now = moment();
@@ -151,11 +150,7 @@ const PostsCard = ({
         </View>
       </View>
 
-        {/* comment modal */}
-      
-        {
-          commentOpen && (<CommentModal isVisible={commentOpen} onClose = {() => setCommentOpen(false)}/>)
-        }
+       
         
     </View>
   );

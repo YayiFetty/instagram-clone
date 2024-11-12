@@ -2,8 +2,16 @@ import React, { useCallback, useRef, useMemo } from "react"
 import { View, Text, TouchableOpacity } from "react-native"
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet"
+import CommentBox from "./CommentBox";
+import { useApp } from "@/src/context/appContext";
 
-const CommentModal = ({ isVisible, onClose }) => {
+interface CommentModalProps{
+  isVisible:boolean;
+  onClose: () => void;
+}
+
+const CommentModal:React.FC<CommentModalProps>  = ({ isVisible, onClose }) => {
+  const {username, isVerified, imageDp, location} = useApp();
   const sheetRef = useRef(null)
 
   const data = useMemo(
@@ -11,17 +19,15 @@ const CommentModal = ({ isVisible, onClose }) => {
     []
   )
 
-  const snapPoints = useMemo(() => ["97%"], [])
+  const snapPoints = useMemo(() => ["100%"], [])
 
   const handleSheetChange = useCallback((index) => {
     if (index === -1) onClose()
   }, [onClose])
 
   const renderItem = useCallback(
-    ({ item }) => (
-      <View className="p-2 border-b border-gray-300">
-        <Text>{item}</Text>
-      </View>
+    ({ item  }:{item:string}) => (
+      <CommentBox username={username}/>
     ),
     []
   )

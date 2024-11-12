@@ -2,9 +2,9 @@ import { FlatList, View } from "react-native";
 import React, { useState } from "react";
 import CustomHeader from "../../../components/CustomHeader";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Stories from "@/src/components/Stories";
-import Posts from "@/src/components/Posts";
-import CommentModal from "@/src/components/CommentModal";
+import Stories from "@/src/components/Story/Stories";
+import Posts from "@/src/components/Posts/Posts";
+import CommentModal from "@/src/components/Comment/CommentModal";
 
 export default function FeedScreen() {
   const [isModalVisible, setIsModalVisible] = useState(false);
