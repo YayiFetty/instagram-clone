@@ -58,6 +58,10 @@ const PostsCard = ({
     return () => clearInterval(interval);
   }, [createdAt]);
 
+  const onMorePress = () => {
+    console.log("More options pressed");
+    // Add any functionality you need here for when more options are pressed
+  };
 
 
   return (
@@ -71,6 +75,7 @@ const PostsCard = ({
               location={location}
               username={username}
               imageDp={imageDp}
+              onMorePress={onMorePress}
             />
           </View>
           <Video
@@ -89,6 +94,7 @@ const PostsCard = ({
             location={location}
             username={username}
             imageDp={imageDp}
+            onMorePress={onMorePress}
           />
           {/* Post Image */}
           <View className="aspect-[4/3]">

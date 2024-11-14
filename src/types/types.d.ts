@@ -8,7 +8,7 @@ type Story = {
 
 // Post interface with media type differentiation
 interface Post {
-    id: number;
+    id: string;
     imageDp: string;
     username: string;
     isVerified: boolean;
@@ -19,4 +19,14 @@ interface Post {
     likes: number;
     caption: string;
     createdAt?: string; // Optional createdAt field
-}
+    onLikePress?: () => void,
+    onMorePress?: () => void
+}   
+interface CommentBoxProps {
+    username: string;
+    isVerified: boolean;
+    imageDp: string;
+    location: string;
+    likes: number;
+    onLikePress: () => void;
+  }

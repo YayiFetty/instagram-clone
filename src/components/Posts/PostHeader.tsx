@@ -1,17 +1,13 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 
-import { BadgeCheck, EllipsisVertical } from 'lucide-react-native'
+import { BadgeCheck, EllipsisVertical, Heart } from 'lucide-react-native'
 import { LinearGradient } from 'expo-linear-gradient'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
-type Post ={
-    isVerified:boolean,
-    location:string,
-    imageDp:string,
-    username:string,
-}
+
 export default function PostHeader({isVerified,
-    location,imageDp, username}:Post) {
+    location,imageDp, username,likes, onLikePress, onMorePress}:Post) {
   return (
     <View className="flex flex-row items-center justify-between px-4 my-2  ">
         {/* for the Dp / username / location */}
@@ -58,9 +54,29 @@ export default function PostHeader({isVerified,
           </View>
         </View>
         {/* for the more icon */}
-        <View>
-          <EllipsisVertical size={25} color="#000" />
-        </View>
+        {
+          (onLikePress || onMorePress) &&(
+           <View className='flex-row items-center gap-4'>
+              {
+                onLikePress && (
+                  <TouchableOpacity>
+                    <Heart size={25} color="#000"/>
+                    <Text>{likes}</Text>
+                  </TouchableOpacity>
+                )
+              }
+
+              {
+                onMorePress && (
+                  <TouchableOpacity>
+                    <EllipsisVertical size={25} color="#000"/>
+                  </TouchableOpacity>
+                )
+              }
+
+           </View>
+          )
+        }
       </View>
   )
 }
