@@ -8,7 +8,7 @@ import CommentModal from "@/src/components/Comment/CommentModal";
 
 export default function FeedScreen() {
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  
   const sections = [
     { type: "stories", id: "stories-section" },
     { type: "posts", id: "posts-section" },

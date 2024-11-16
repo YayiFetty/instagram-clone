@@ -10,7 +10,7 @@ type Story = {
 interface Post {
     id: string;
     imageDp: string;
-    username: string;
+    username?: string;
     isVerified: boolean;
     location: string;
     mediaUrl: string; // URL for image or video

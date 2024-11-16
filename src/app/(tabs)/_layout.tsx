@@ -43,6 +43,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="profile"
         options={{
+          headerShown:false,
           tabBarIcon: ({ color }) => (
             <View style={{ height: 25, width: 25, borderRadius: 25 / 2, overflow: "hidden" }}>
               <Image
