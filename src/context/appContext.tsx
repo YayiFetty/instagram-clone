@@ -53,7 +53,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-
   // Fetch user data when the app loads
   useEffect(() => {
     fetchUserData();

@@ -11,6 +11,13 @@ import PostHeader from "./PostHeader";
 import { ResizeMode, Video } from "expo-av"; // Import Video component from expo-av
 import { router } from "expo-router";
 import CommentModal from "../Comment/CommentModal";
+import { AdvancedImage } from "cloudinary-react-native";
+import { Cloudinary } from "@cloudinary/url-gen";
+import cld from "@/src/lib/cloudinary";
+
+// Create a Cloudinary instance and set your cloud name.
+
+
 
 const PostsCard = ({
   imageDp,
@@ -28,6 +35,7 @@ const PostsCard = ({
   const [timePosted, setTimePosted] = useState("");
   const videoRef = useRef(null); // Ref to control video playback
   
+  const myImage = cld.image('sample')
   const getTimePosted = () => {
     const now = moment();
     const posted = moment(createdAt);
@@ -101,6 +109,9 @@ const PostsCard = ({
             <Image
               source={{ uri: mediaUrl }}
               style={{ width: "100%", height: "100%" }}
+            />
+            <AdvancedImage
+            cldImg={myImage} style={{width:300, height:300}}
             />
           </View>
         </View>

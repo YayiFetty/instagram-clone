@@ -20,10 +20,10 @@ export default function ProfileHeader() {
       </View>
       <View className="flex-row gap-3 justify-center items-center">
         <TouchableOpacity>
-          <AtSign size={24} />
+          <AtSign size={24}/>
         </TouchableOpacity>
         <TouchableOpacity>
-          <SquarePlus size={24} />
+          <SquarePlus size={24}/>
         </TouchableOpacity>
         <TouchableOpacity>
           <Menu size={24} />
