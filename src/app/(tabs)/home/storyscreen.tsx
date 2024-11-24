@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function Stories() {
+export default function StoryScreen() {
   return (
     <View>
-      <Text>Stories</Text>
+      <Text>S</Text>
     </View>
   )
 }

@@ -29,6 +29,28 @@
         "username": "zackjohn",
         "imageUrl": "https://picsum.photos/100/100?random=3",
         "isLive": false
+      },
+      {
+        "id": "4",
+        "username": "nnne",
+        "imageUrl": "https://picsum.photos/100/100?random=2",
+        "isLive": false      },
+      {
+        "id": "5",
+        "username": "Wednnne",
+        "imageUrl": "https://picsum.photos/100/100?random=2",
+        "isLive": false      },
+      {
+        "id": "6",
+        "username": "grezack",
+        "imageUrl": "https://picsum.photos/100/100?random=3",
+        "isLive": false
+      },
+      {
+        "id": "7",
+        "username": "trezack",
+        "imageUrl": "https://picsum.photos/100/100?random=3",
+        "isLive": false
       }
     ],
     "posts": [

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { api } from "../service/api";
+import { Post, PostState, Story, User } from "../types/types";
 
 
 const AppContext = createContext<PostState | undefined>(undefined);
@@ -38,9 +39,23 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const fetchStories = async() => {
+    try{
+      const response = await api.get("/stories");
+      const data = response.data.stories || response.data
+      setStories(data);
+      console.log("dataaa",data);
+    }
+    catch(err){
+      console.error("Error fetching stories:", err)
+    }
+  }
+
   // Fetch user data when the app loads
   useEffect(() => {
+    fetchPosts();
     fetchUserData();
+    fetchStories();
   }, []);
 
   const contextValue: PostState = {
@@ -50,6 +65,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     user,
     error,
     fetchPosts,
+    
   };
 
   return (

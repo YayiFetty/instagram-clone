@@ -1,30 +1,35 @@
-import { FlatList, View } from "react-native";
-import React from "react";
-import story from "@/assets/data/story.json";
-import StoriesCard from "./StoriesCard";
 
-const Stories = () => {
-  const renderItem = ({ item}) => (
-    <StoriesCard
-      username={item.username}
-      imageUrl={item.imageUrl}
-      isLive={item.isLive}
-      id={item.id}
-    />
-  );
+
+import { View, Text, FlatList } from "react-native";
+import React from "react";
+import StoriesCard from "./StoriesCard";
+import { useApp } from "@/src/context/appContext";
+import useDynamicLayout from "@/src/lib/useDynamic";
+
+export default function Stories() {
+  const { stories } = useApp();
+  const {padding} = useDynamicLayout();
+  const renderItem = ({ item }) => {
+    return (
+      <StoriesCard
+        imageUrl={item.imageUrl}
+        username={item.username}
+        id={item.id}
+        isLive={item.isLive}
+      />
+    );
+  };
 
   return (
     <View>
       <FlatList
-        data={story}
+        data={stories}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()} // Using index as key instead of id
-        horizontal={true}
+        keyExtractor={(item) => item.id.toString()}
+        horizontal
         showsHorizontalScrollIndicator={false}
-        className="px-4 py-2"
+      
       />
     </View>
   );
-};
-
-export default Stories;
+}
