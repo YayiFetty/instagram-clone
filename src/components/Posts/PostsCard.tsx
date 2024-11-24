@@ -1,23 +1,13 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useState, useRef } from "react";
-import {
-  Bookmark,
-  ExternalLink,
-  Heart,
-  MessageCircle,
-} from "lucide-react-native";
+import { Bookmark, ExternalLink, Heart, MessageCircle } from "lucide-react-native";
 import moment from "moment";
 import PostHeader from "./PostHeader";
-import { ResizeMode, Video } from "expo-av"; // Import Video component from expo-av
-import { router } from "expo-router";
-import CommentModal from "../Comment/CommentModal";
+import { ResizeMode, Video } from "expo-av";
 import { AdvancedImage } from "cloudinary-react-native";
-import { Cloudinary } from "@cloudinary/url-gen";
 import cld from "@/src/lib/cloudinary";
-
-// Create a Cloudinary instance and set your cloud name.
-
-
+// Change this import
+import { fill } from "@cloudinary/url-gen/actions/resize";
 
 const PostsCard = ({
   imageDp,
@@ -33,66 +23,49 @@ const PostsCard = ({
   onCommentPress,
 }: Post) => {
   const [timePosted, setTimePosted] = useState("");
-  const videoRef = useRef(null); // Ref to control video playback
-  
-  const myImage = cld.image('sample')
-  const getTimePosted = () => {
-    const now = moment();
-    const posted = moment(createdAt);
-    const monthsDiff = now.diff(posted, "months");
-    const daysDiff = now.diff(posted, "days");
-    const hoursDiff = now.diff(posted, "hours");
-    const minsDiff = now.diff(posted, "minutes");
-
-    if (monthsDiff >= 11) return posted.format("MMMM D, YYYY");
-    if (daysDiff >= 7) return posted.format("MMMM D");
-    if (daysDiff >= 1) return `${daysDiff}d ago`;
-    if (hoursDiff >= 1) return `${hoursDiff}h ago`;
-
-    return minsDiff <= 0
-      ? "Just now"
-      : minsDiff === 1
-      ? `${minsDiff} min ago`
-      : `${minsDiff} mins ago`;
-  };
+  const videoRef = useRef(null);
 
   useEffect(() => {
+    const getTimePosted = () => moment(createdAt).fromNow();
     setTimePosted(getTimePosted());
 
-    const interval = setInterval(() => {
-      setTimePosted(getTimePosted());
-    }, 30000);
-
+    const interval = setInterval(() => setTimePosted(getTimePosted()), 30000);
     return () => clearInterval(interval);
   }, [createdAt]);
 
-  const onMorePress = () => {
-    console.log("More options pressed");
-    // Add any functionality you need here for when more options are pressed
-  };
+  const getPublicUrl = (url) => {
+    if (!url) return null;
+    const matches = url.match(/\/v\d+\/([^/]+)$/);
+    return matches ? matches[1].split('.')[0] : null; // Remove file extension if present
+  }
 
-
+  // Modified image transformation
+  const mediaImage = mediaUrl ? cld
+    .image(getPublicUrl(mediaUrl))
+    .format('auto')
+    .quality('auto') : null;
+console.log("media url", mediaUrl)
   return (
-    <View className="flex-1 flex-col relative w-full">
-      {/* Post header inside video or outside image */}
+    <View className="flex-1 flex-col w-full p-4">
+      {/* Post Header */}
       {mediaType === "video" ? (
-        <View className=" relative aspect-[16/9]">
+        <View className="relative aspect-video">
           <View className="absolute top-0 left-0 right-0 z-10">
             <PostHeader
               isVerified={isVerified}
               location={location}
               username={username}
               imageDp={imageDp}
-              onMorePress={onMorePress}
+              onMorePress={() => console.log("More")}       
             />
           </View>
           <Video
             ref={videoRef}
-            source={ require ("../../assets/trtr.mp4") }
-            style={{ width: "100%", height: "100%" }}
+            source={{ uri: mediaUrl }}
+            className="w-full h-full"
             resizeMode={ResizeMode.COVER}
-            shouldPlay={true}
-            isLooping={true}
+            shouldPlay
+            isLooping
           />
         </View>
       ) : (
@@ -102,73 +75,65 @@ const PostsCard = ({
             location={location}
             username={username}
             imageDp={imageDp}
-            onMorePress={onMorePress}
+            onMorePress={() => console.log("More")} 
           />
-          {/* Post Image */}
-          <View className="aspect-[4/3]">
-            <Image
-              source={{ uri: mediaUrl }}
-              style={{ width: "100%", height: "100%" }}
-            />
-            <AdvancedImage
-            cldImg={myImage} style={{width:300, height:300}}
-            />
+          <View className="aspect-square">
+            {mediaImage && (
+              <AdvancedImage 
+                cldImg={mediaImage} 
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  aspectRatio: 1
+                }}
+              />
+            )}
           </View>
         </View>
       )}
 
-      {/* Likes, comments, share, bookmark */}
-      <View className="flex flex-row justify-between items-center my-2 px-4">
+      {/* Rest of the component remains the same */}
+      <View className="flex-row justify-between items-center my-2">
         <View className="flex-row gap-3">
+
           <TouchableOpacity className="flex-row items-center gap-1">
             <Heart size={25} color="#000" />
-            <Text className="text-[11px]">{likes}</Text>
+            <Text className="text-xs">{likes}</Text>
           </TouchableOpacity>
+
           <TouchableOpacity onPress={onCommentPress} className="flex-row items-center gap-1">
             <MessageCircle size={25} color="#000" />
-            <Text className="text-[11px]">5</Text>
+            <Text className="text-xs">5</Text>
           </TouchableOpacity>
+
           <TouchableOpacity>
             <ExternalLink size={25} color="#000" />
           </TouchableOpacity>
         </View>
-        <View>
-          <TouchableOpacity>
-            <Bookmark size={25} color="#000" />
-          </TouchableOpacity>
-        </View>
-      
+
+        <TouchableOpacity>
+          <Bookmark size={25} color="#000" />
+        </TouchableOpacity>
+
       </View>
 
-      {/* Liked by section */}
-      <View className="px-4">
-        <Image source={{ uri: imageDp }} />
-        <View className="flex-row gap-1">
+      <View className="mb-2">
+        <View className="flex-row items-center gap-2">
           <Image source={{ uri: imageDp }} className="w-6 h-6 rounded-full" />
-          <Text>Liked by {likedBy} </Text>
+          <Text className="text-sm">Liked by {likedBy}</Text>
+        </View>
+        <View className="flex-row gap-2 mt-2">
+          <Text className="text-sm font-semibold">{username}</Text>
+          <Text className="text-sm">{caption}</Text>
         </View>
       </View>
 
-      {/* Username and caption */}
-      <View className="px-4 flex-row gap-2">
-        <Text className="text-sm font-semibold">{username}</Text>
-        <Text className="text-sm">{caption}</Text>
-      </View>
-
-      {/* View all comments */}
-      <View className="px-4 mb-3">
+      <View>
         <TouchableOpacity>
           <Text className="text-gray-500">View all comments</Text>
         </TouchableOpacity>
-
-        {/* Time posted */}
-        <View>
-          <Text>{timePosted}</Text>
-        </View>
+        <Text className="text-xs text-gray-500 mt-1">{timePosted}</Text>
       </View>
-
-       
-        
     </View>
   );
 };

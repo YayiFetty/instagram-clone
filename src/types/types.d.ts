@@ -1,28 +1,46 @@
-// Story interface
-type Story = {
+export interface Story {
     id: string;
     imageUrl: string;
     username: string;
     isLive: boolean;
-};
-
-// Post interface with media type differentiation
-interface Post {
+    viewed?: boolean;
+  }
+  
+  export interface Post {
     id: string;
     imageDp: string;
-    username?: string;
+    username: string;
     isVerified: boolean;
     location: string;
-    mediaUrl: string; // URL for image or video
-    mediaType: 'image' | 'video'; // Media type: 'image' or 'video'
+    mediaUrl: string;
+    mediaType: 'image' | 'video';
     likedBy: string;
     likes: number;
     caption: string;
-    createdAt?: string; // Optional createdAt field
-    onLikePress?: () => void,
-    onMorePress?: () => void
-}   
-interface CommentBoxProps {
+    createdAt: string;
+    onLikePress?: () => void;
+    onMorePress?: () => void;
+    comments?: Comment[];
+  }
+  
+
+// PostState type
+export type PostState = {
+    stories: Story[];
+    posts: Post[];
+    loading: boolean;
+    error: string | null;
+    user: User | null;
+    fetchPosts: () => Promise<void>;
+  }
+  export interface Comment {
+    id: string;
+    username: string;
+    comment: string;
+    createdAt: string;
+  }
+  
+  export interface CommentBoxProps {
     username: string;
     isVerified: boolean;
     imageDp: string;
@@ -30,3 +48,23 @@ interface CommentBoxProps {
     likes: number;
     onLikePress: () => void;
   }
+  
+  export interface User {
+    id: string;
+    username: string;
+    fullName: string;
+    profilePicture: string;
+    bio: string;
+    website: string;
+    followers: number;
+    following: number;
+    postsCount: number;
+    isVerified: boolean;
+  }
+  
+  export interface InstagramData {
+    user: User;
+    stories: Story[];
+    posts: Post[];
+  }
+  

@@ -2,21 +2,6 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import { api } from "../service/api";
 
 
-type User = {
-  username: string;
-  isVerified: boolean;
-  imageDp: string;
-  location: string;
-};
-type PostState = {
-  stories: Story[];
-  posts: Post[];
-  loading: boolean;
-  error: string | null;
-  user: User | null;
-  fetchPosts: () => void;
-};
-
 const AppContext = createContext<PostState | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {

@@ -1,5 +1,4 @@
 
-
 import { ActivityIndicator, FlatList, View, Text } from "react-native"
 import React, { useEffect } from "react"
 import PostsCard from "./PostsCard"
@@ -9,12 +8,15 @@ interface RenderItemProps {
   item: Post
 }
 
-export default function Posts({ onCommentPress }) {
+interface CommentProps{
+  onCommentPress?:() => void
+}
+export default function Posts({ onCommentPress }: CommentProps) {
   const { posts, loading, error, fetchPosts } = useApp()
 
   useEffect(() => {
     fetchPosts()
-  }, [])
+  }, []);
 
   const renderItem = ({ item }: RenderItemProps) => {
     return (

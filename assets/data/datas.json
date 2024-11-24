@@ -1,203 +1,190 @@
 {
+    "user": {
+      "id": "123",
+      "username": "johndoe",
+      "fullName": "John Doe",
+      "profilePicture": "https://picsum.photos/100/100?random=11",
+      "bio": "Traveler. Foodie. Photographer.",
+      "website": "https://johndoe.com",
+      "followers": 1200,
+      "following": 300,
+      "postsCount": 8,
+      "isVerified": true
+    },
     "stories": [
-        {
-            "id": "1",
-            "username": "Your Story",
-            "imageUrl": "https://picsum.photos/100/100?random=1"
-        },
-        {
-            "id": "2",
-            "username": "karennne",
-            "imageUrl": "https://picsum.photos/100/100?random=2",
-            "isLive": true
-        },
-        {
-            "id": "3",
-            "username": "zackjohn",
-            "imageUrl": "https://picsum.photos/100/100?random=3"
-        },
-        {
-            "id": "4",
-            "username": "kieron_d",
-            "imageUrl": "https://picsum.photos/100/100?random=4"
-        },
-        {
-            "id": "5",
-            "username": "craig_love",
-            "imageUrl": "https://picsum.photos/100/100?random=5"
-        },
-        {
-            "id": "6",
-            "username": "craig_love",
-            "imageUrl": "https://picsum.photos/100/100?random=5"
-        },
-        {
-            "id": "7",
-            "username": "craig_love",
-            "imageUrl": "https://picsum.photos/100/100?random=5"
-        },
-        {
-            "id": "8",
-            "username": "craig_love",
-            "imageUrl": "https://picsum.photos/100/100?random=5"
-        }
+      {
+        "id": "1",
+        "username": "Your Story",
+        "imageUrl": "https://picsum.photos/100/100?random=1",
+        "isLive": false
+      },
+      {
+        "id": "2",
+        "username": "karennne",
+        "imageUrl": "https://picsum.photos/100/100?random=2",
+        "isLive": true
+      },
+      {
+        "id": "3",
+        "username": "zackjohn",
+        "imageUrl": "https://picsum.photos/100/100?random=3",
+        "isLive": false
+      }
     ],
     "posts": [
-        {
+      {
+        "id": "1",
+        "username": "johndoe",
+        "location": "New York, USA",
+        "mediaUrl": "https://picsum.photos/400/500?random=1",
+        "mediaType": "image",
+        "imageDp": "https://picsum.photos/100/100?random=11",
+        "isVerified": true,
+        "likes": 345,
+        "caption": "Concrete jungle dreams 🌆 #NYC",
+        "likedBy": "karennne",
+        "comments": [
+          {
             "id": "1",
-            "username": "yayi",
-            "location": "Tokyo, Japan",
-            "mediaUrl": "https://picsum.photos/400/500?random=1",
-            "mediaType": "image",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": false,
-            "likes": 34474,
-            "caption": "Exploring the vibrant streets of Tokyo! \ud83c\udfd9\ufe0f #TokyoLife",
-            "likedBy": "jane_doe",
-            "createdAt": "2024-11-04T08:30:00Z"
-        },
-        {
+            "username": "karennne",
+            "comment": "Amazing shot! 😍",
+            "createdAt": "2024-11-24T10:00:00Z"
+          },
+          {
             "id": "2",
-            "username": "yayoo",
-            "location": "Tokyo, Japan",
-            "mediaUrl": "https://picsum.photos/400/500?random=2",
-            "mediaType": "image",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": false,
-            "likes": 30044,
-            "caption": "Sunset magic in the city \ud83c\udf05 #TokyoSunset",
-            "likedBy": "emma_stone",
-            "createdAt": "2024-11-03T15:00:00Z"
-        },
-        {
-            "id": "3",
-            "username": "fetty",
-            "location": "Tokyo, Japan",
-            "mediaUrl": "https://picsum.photos/400/500?random=3",
-            "mediaType": "image",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": true,
-            "likes": 45143,
-            "caption": "Tokyo nights are unmatched \ud83c\udf03\u2728 #CityLights",
-            "likedBy": "craig_love",
-            "createdAt": "2024-11-03T12:15:00Z"
-        },
-        {
-            "id": "4",
-            "username": "ferrari",
-            "location": "Paris, France",
-            "mediaUrl": "https://picsum.photos/400/500?random=4",
-            "mediaType": "image",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": false,
-            "likes": 25559,
-            "caption": "Paris is always a good idea \u2764\ufe0f #CityOfLove",
-            "likedBy": "jane_doe",
-            "createdAt": "2024-11-02T10:45:00Z"
-        },
-        {
-            "id": "5",
-            "username": "graham",
-            "location": "Tokyo, Japan",
-            "mediaUrl": "https://picsum.photos/400/500?random=5",
-            "mediaType": "image",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": false,
-            "likes": 22913,
-            "caption": "Chasing dreams under the Tokyo skyline \ud83c\udf07",
-            "likedBy": "john_doe",
-            "createdAt": "2024-11-02T09:20:00Z"
-        },
-        {
-            "id": "6",
-            "username": "henzo",
-            "location": "London, UK",
-            "mediaUrl": "https://picsum.photos/400/500?random=6",
-            "mediaType": "image",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": true,
-            "likes": 3234,
-            "caption": "Morning coffee in the heart of London \u2615\ufe0f\ud83c\uddec\ud83c\udde7",
-            "likedBy": "jane_doe",
-            "createdAt": "2024-11-01T07:30:00Z"
-        },
-        {
-            "id": "7",
-            "username": "reddington",
-            "location": "London, UK",
-            "mediaUrl": "https://picsum.photos/400/500?random=7",
-            "mediaType": "image",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": true,
-            "likes": 14669,
-            "caption": "Exploring London's hidden gems \ud83d\udd70\ufe0f",
-            "likedBy": "emma_stone",
-            "createdAt": "2024-11-01T16:00:00Z"
-        },
-        {
-            "id": "8",
-            "username": "floro",
-            "location": "New York, USA",
-            "mediaUrl": "https://picsum.photos/400/500?random=8",
-            "mediaType": "image",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": true,
-            "likes": 39134,
-            "caption": "Concrete jungle dreams \ud83c\udf06 #NYC",
-            "likedBy": "emma_stone",
-            "createdAt": "2024-10-30T20:45:00Z"
-        },
-        {
-            "id": "9",
-            "username": "setto",
-            "location": "London, UK",
-            "mediaUrl": "https://picsum.photos/400/500?random=9",
-            "mediaType": "image",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": false,
-            "likes": 42103,
-            "caption": "London's calling \ud83c\uddec\ud83c\udde7",
-            "likedBy": "john_doe",
-            "createdAt": "2024-10-28T11:00:00Z"
-        },
-        {
-            "id": "10",
-            "username": "preshlucci",
-            "location": "Tokyo, Japan",
-            "mediaUrl": "https://picsum.photos/400/500?random=10",
-            "mediaType": "image",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": true,
-            "likes": 17626,
-            "caption": "Taking in the views of Tokyo from above \ud83d\uddfc",
-            "likedBy": "john_doe",
-            "createdAt": "2024-10-27T14:10:00Z"
-        },
-        {
-            "id": "11",
-            "username": "alex_video",
-            "location": "Sydney, Australia",
-            "mediaUrl": "https://x.com/i/status/1825277102096371809",
-            "mediaType": "video",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": true,
-            "likes": 15234,
-            "caption": "Enjoying the beaches of Sydney! \ud83c\udfd6\ufe0f #SydneyLife",
-            "likedBy": "sara_smith",
-            "createdAt": "2024-10-26T18:00:00Z"
-        },
-        {
-            "id": "12",
-            "username": "maria_video",
-            "location": "Barcelona, Spain",
-            "mediaUrl": "https://x.com/i/status/1825277102096371809",
-            "mediaType": "video",
-            "imageDp": "https://pbs.twimg.com/profile_images/1341697777831727106/mUWlkr-0.jpg",
-            "isVerified": false,
-            "likes": 9312,
-            "caption": "Breathtaking views of Barcelona! \ud83c\uddea\ud83c\uddf8",
-            "likedBy": "sam_davis",
-            "createdAt": "2024-10-25T22:30:00Z"
-        }
+            "username": "zackjohn",
+            "comment": "New York vibes ✨",
+            "createdAt": "2024-11-24T10:05:00Z"
+          }
+        ],
+        "createdAt": "2024-11-24T08:30:00Z"
+      },
+      {
+        "id": "2",
+        "username": "karennne",
+        "location": "Paris, France",
+        "mediaUrl": "https://picsum.photos/400/500?random=2",
+        "mediaType": "image",
+        "imageDp": "https://picsum.photos/100/100?random=2",
+        "isVerified": true,
+        "likes": 128,
+        "caption": "Bonjour, Paris! ❤️",
+        "likedBy": "johndoe",
+        "comments": [
+          {
+            "id": "1",
+            "username": "johndoe",
+            "comment": "Stunning view!",
+            "createdAt": "2024-11-24T09:00:00Z"
+          }
+        ],
+        "createdAt": "2024-11-23T12:30:00Z"
+      },
+      {
+        "id": "3",
+        "username": "zackjohn",
+        "location": "London, UK",
+        "mediaUrl": "https://picsum.photos/400/500?random=3",
+        "mediaType": "image",
+        "imageDp": "https://picsum.photos/100/100?random=3",
+        "isVerified": false,
+        "likes": 456,
+        "caption": "Tea time in London ☕ #BritishLife",
+        "likedBy": "johndoe",
+        "comments": [
+          {
+            "id": "1",
+            "username": "karennne",
+            "comment": "Love this vibe!",
+            "createdAt": "2024-11-23T15:00:00Z"
+          }
+        ],
+        "createdAt": "2024-11-23T11:00:00Z"
+      },
+      {
+        "id": "4",
+        "username": "johndoe",
+        "location": "Tokyo, Japan",
+        "mediaUrl": "https://picsum.photos/400/500?random=4",
+        "mediaType": "image",
+        "imageDp": "https://picsum.photos/100/100?random=11",
+        "isVerified": true,
+        "likes": 789,
+        "caption": "Cherry blossoms in full bloom 🌸 #Tokyo",
+        "likedBy": "karennne",
+        "comments": [],
+        "createdAt": "2024-11-22T09:45:00Z"
+      },
+      {
+        "id": "5",
+        "username": "karennne",
+        "location": "Rome, Italy",
+        "mediaUrl": "https://picsum.photos/400/500?random=5",
+        "mediaType": "image",
+        "imageDp": "https://picsum.photos/100/100?random=2",
+        "isVerified": true,
+        "likes": 512,
+        "caption": "Pizza, pasta, and perfection 🍕🍝 #Rome",
+        "likedBy": "johndoe",
+        "comments": [],
+        "createdAt": "2024-11-22T08:30:00Z"
+      },
+      {
+        "id": "6",
+        "username": "zackjohn",
+        "location": "Berlin, Germany",
+        "mediaUrl": "https://picsum.photos/400/500?random=6",
+        "mediaType": "image",
+        "imageDp": "https://picsum.photos/100/100?random=3",
+        "isVerified": false,
+        "likes": 214,
+        "caption": "Brandenburg Gate at sunset 🌇",
+        "likedBy": "karennne",
+        "comments": [
+          {
+            "id": "1",
+            "username": "johndoe",
+            "comment": "Amazing architecture!",
+            "createdAt": "2024-11-21T14:00:00Z"
+          }
+        ],
+        "createdAt": "2024-11-21T12:00:00Z"
+      },
+      {
+        "id": "7",
+        "username": "johndoe",
+        "location": "Sydney, Australia",
+        "mediaUrl": "https://picsum.photos/400/500?random=7",
+        "mediaType": "image",
+        "imageDp": "https://picsum.photos/100/100?random=11",
+        "isVerified": true,
+        "likes": 943,
+        "caption": "Surf’s up at Bondi Beach 🏄‍♂️ #Sydney",
+        "likedBy": "zackjohn",
+        "comments": [
+          {
+            "id": "1",
+            "username": "karennne",
+            "comment": "Looks so fun!",
+            "createdAt": "2024-11-20T08:15:00Z"
+          }
+        ],
+        "createdAt": "2024-11-20T07:30:00Z"
+      },
+      {
+        "id": "8",
+        "username": "karennne",
+        "location": "Barcelona, Spain",
+        "mediaUrl": "https://picsum.photos/400/500?random=8",
+        "mediaType": "image",
+        "imageDp": "https://picsum.photos/100/100?random=2",
+        "isVerified": true,
+        "likes": 612,
+        "caption": "Gaudí's masterpieces 😍 #Barcelona",
+        "likedBy": "johndoe",
+        "comments": [],
+        "createdAt": "2024-11-19T16:30:00Z"
+      }
     ]
-}
+  }
+  
