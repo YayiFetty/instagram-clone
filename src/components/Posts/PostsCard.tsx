@@ -57,7 +57,7 @@
 //               location={location}
 //               username={username}
 //               imageDp={imageDp}
-//               onMorePress={() => console.log("More")}       
+//               onMorePress={() => console.log("More")}
 //             />
 //           </View>
 //           <Video
@@ -76,12 +76,12 @@
 //             location={location}
 //             username={username}
 //             imageDp={imageDp}
-//             onMorePress={() => console.log("More")} 
+//             onMorePress={() => console.log("More")}
 //           />
 //           <View className="aspect-square">
 //             {/* {mediaImage && (
-//               <AdvancedImage 
-//                 cldImg={mediaImage} 
+//               <AdvancedImage
+//                 cldImg={mediaImage}
 //                 style={{
 //                   width: '100%',
 //                   height: '100%',
@@ -90,8 +90,8 @@
 //               />
 //             )} */}
 
-// Image 
-//                 <Image source={{uri:mediaUrl}} 
+// Image
+//                 <Image source={{uri:mediaUrl}}
 //                 style={{
 //                   width: '100%',
 //                   height: '100%',
@@ -150,15 +150,84 @@
 
 // export default PostsCard;
 
+import { View, Text, Image } from "react-native";
+import React from "react";
+import PostHeader from "./PostHeader";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import useDynamicLayout from "@/src/lib/useDynamic";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Feather from "@expo/vector-icons/Feather";
+import DisplayPic from "../imagedp/DisplayPic";
+import SmallDp from "../imagedp/SmallDp";
 
-import { View, Text } from 'react-native'
-import React from 'react'
-import PostHeader from './PostHeader'
-
-export default function PostsCard() {
+export default function PostsCard({
+  imageDp,
+  location,
+  isVerified,
+  username,
+  mediaUrl,
+  likes,
+  likedBy,
+}) {
+  const { iconSize } = useDynamicLayout();
   return (
-    <View>
-      <PostHeader imageUrl={imageUrl}/>
+    <View className="flex-1 space-y-2">
+      <PostHeader
+        imageDp={imageDp}
+        location={location}
+        isVerified={isVerified}
+        username={username}
+      />
+      <View className="flex flex-col space-y-2 aspect-square">
+        <Image source={{ uri: mediaUrl }} className=" aspect-[4/3]" />
+
+        <View className="flex flex-row ">
+          <View className="flex-1 flex-row items-center gap-3">
+            <TouchableOpacity>
+              <View className="flex flex-row items-center gap-1">
+                <AntDesign name="hearto" size={iconSize} color="black" />
+                <Text>{likes}</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+              <View className="flex flex-row items-center gap-1">
+                <FontAwesome5 name="comment" size={24} color="black" />
+                <Text>123</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity className="flex flex-row">
+              <AntDesign name="sharealt" size={24} color="black" />
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity>
+            <Feather name="bookmark" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+
+        {/* liked by */}
+        <View className=" relative flex flex-row gap-4 ">
+          <View className="">
+            {Array(3)
+              .fill(null)
+              .map((_, index) => (
+               <View key={index}  className={`absolute ${index === 0 ? "z-10" : ""} 
+               ${
+                index === 1 ? "z-20 left-2":""
+               } ${
+                index === 2 ? "z-30 left-4":""
+               }
+               `}>
+                 <SmallDp />
+               </View>
+              ))}
+          </View>
+          <Text className="ml-7 text-sm text-gray-700" >Liked by {likedBy} and others</Text>
+        </View>
+      </View>
     </View>
-  )
+  );
 }

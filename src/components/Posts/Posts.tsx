@@ -55,15 +55,30 @@
 //   );
 // }
 
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, FlatList } from 'react-native'
+import React, { useEffect } from 'react'
 import PostsCard from './PostsCard'
+import { useApp } from '@/src/context/appContext'
 
 export default function Posts() {
-  
+  const {posts, fetchPosts} = useApp();
+
+  useEffect(() => {
+  fetchPosts()
+  }, [])
+  const renderItem = ({item}) => {
+    return <PostsCard {...item}/>
+  }
+
   return (
     <View>
-      <PostsCard/>
+      <FlatList
+      data={posts}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.id.toString()}
+      showsVerticalScrollIndicator={false}
+    
+      />
     </View>
   )
 }

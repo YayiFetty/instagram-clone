@@ -5,14 +5,13 @@
 // import { LinearGradient } from 'expo-linear-gradient'
 // import { TouchableOpacity } from 'react-native-gesture-handler'
 
-
 // export default function PostHeader({isVerified,
 //     location,imageDp, username,likes, onLikePress, onMorePress}:Post) {
 //   return (
 //     <View className="flex flex-row items-center justify-between px-4 my-2  ">
 //         {/* for the Dp / username / location */}
 //         <View className="flex flex-row justify-start gap-3 ">
-//         <LinearGradient 
+//         <LinearGradient
 //         colors={["#f09433", "#e6683c", "#dc2743", "#cc2366", "#bc1888"]}
 //         style={{
 //           width: 54,
@@ -81,28 +80,37 @@
 //   )
 // }
 
-
-import { View, Text } from 'react-native'
-import React from 'react'
-import ImageDp from '../imagedp/imageDp'
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import useDynamicLayout from '@/src/lib/useDynamic';
-export default function PostHeader({imageUrl, username, isVerified,location}) {
-  const {iconSize} = useDynamicLayout()
+import { View, Text } from "react-native";
+import React from "react";
+import ImageDp from "../imagedp/DisplayPic";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Entypo from "@expo/vector-icons/Entypo";
+import useDynamicLayout from "@/src/lib/useDynamic";
+import DisplayPic from "../imagedp/DisplayPic";
+export default function PostHeader({
+  imageDp,
+  username,
+  isVerified,
+  location,
+}) {
+  const { iconSize } = useDynamicLayout();
   return (
-    <View>
-      <ImageDp imageUrl={imageUrl}/>
-      <View>
-      <Text>{username}</Text>
-      {
-        isVerified && (
-          <MaterialIcons name="verified" size={iconSize} color="blue" />
-        )
-      }
+    <View className="flex flex-row">
+      <View className=" flex-1 gap-4 flex-row">
+        <DisplayPic imageDp={imageDp} />
+        <View className="flex flex-col justify-center items-center">
+          <View className="flex flex-row justify-center items-center">
+            <Text>{username}</Text>
+            {isVerified && (
+              <MaterialIcons name="verified" size={iconSize} color="blue" />
+            )}
+          </View>
+          <View>
+            <Text>{location}</Text>
+          </View>
+        </View>
       </View>
-      <View>
-        <Text>{location}</Text>
-      </View>
+      <Entypo name="dots-three-vertical" size={iconSize} color="black" />
     </View>
-  )
+  );
 }

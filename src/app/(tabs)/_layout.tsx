@@ -3,6 +3,7 @@ import { Tabs } from "expo-router";
 import { Clapperboard, Home, Search, SquarePlus } from "lucide-react-native";
 import { View, Image, useWindowDimensions } from "react-native";
 import useDynamicLayout from "@/src/lib/useDynamic";
+import SmallDp from "@/src/components/imagedp/SmallDp";
 
 export default function TabsLayout() {
   const {iconSize} = useDynamicLayout();
@@ -47,13 +48,7 @@ export default function TabsLayout() {
         options={{
           headerShown:false,
           tabBarIcon: ({ color }) => (
-            <View style={{ height: iconSize, width: iconSize, borderRadius: 25 / 2, overflow: "hidden" }}>
-              <Image
-                source={{ uri: "https://pbs.twimg.com/profile_images/1794692732474003456/PiaTQJ5S_400x400.jpg" }}  // Replace with actual URL
-                style={{ height: iconSize, width: iconSize }}
-                resizeMode="cover"
-              />
-            </View>
+           <SmallDp/>
           ),
         }}
       />

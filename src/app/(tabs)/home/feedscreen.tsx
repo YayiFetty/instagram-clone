@@ -56,10 +56,10 @@ export default function FeedScreen() {
   return (
    <SafeAreaView  className='flex-1 space-y-2' style={{paddingHorizontal:padding}}>
       <CustomHeader/>
-      <View>
+      
         <Stories/>
-        
-      </View>
+        <Posts/>
+      
   
    </SafeAreaView>
   )

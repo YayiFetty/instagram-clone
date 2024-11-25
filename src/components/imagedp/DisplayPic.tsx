@@ -4,10 +4,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import useDynamicLayout from '@/src/lib/useDynamic';
 
 type ImageUrlProps = {
-  imageUrl: string;
+  imageDp: string;
 };
 
-export default function ImageDp({ imageUrl }: ImageUrlProps) {
+export default function DisplayPic({ imageDp }: ImageUrlProps) {
   const { widthS } = useDynamicLayout(); // Get dynamic width
 
   const gradientSize = widthS * 0.5; // Outer container size
@@ -45,7 +45,7 @@ export default function ImageDp({ imageUrl }: ImageUrlProps) {
           }}
         >
           <Image
-            source={{ uri: imageUrl }}
+            source={{ uri: imageDp }}
             style={{
               width: '100%',
               height: '100%',
