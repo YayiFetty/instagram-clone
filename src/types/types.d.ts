@@ -68,3 +68,6 @@ export type PostState = {
     posts: Post[];
   }
   
+  declare module '@env' {
+    export const EXPO_PUBLIC_API_BASE_URL: string;
+  }

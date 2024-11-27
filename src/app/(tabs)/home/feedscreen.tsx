@@ -8,7 +8,7 @@
 
 // export default function FeedScreen() {
 //   const [isModalVisible, setIsModalVisible] = useState(false);
-  
+
 //   const sections = [
 //     { type: "stories", id: "stories-section" },
 //     { type: "posts", id: "posts-section" },
@@ -42,25 +42,44 @@
 //   );
 // }
 
+import { View, Text,  FlatList } from "react-native";
+import React from "react";
+import useDynamicLayout from "@/src/lib/useDynamic";
+import CustomHeader from "@/src/components/CustomHeader";
+import Posts from "@/src/components/Posts/Posts";
+import Stories from "@/src/components/Story/Stories";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { View, Text, SafeAreaView } from 'react-native'
-import React from 'react'
-import useDynamicLayout from '@/src/lib/useDynamic'
-import CustomHeader from '@/src/components/CustomHeader'
-import Posts from '@/src/components/Posts/Posts'
-import Stories from '@/src/components/Story/Stories'
-
+const section = [
+  { type: "stories", id: "stories-section" },
+  { type: "posts", id: "posts-section" },
+];
 
 export default function FeedScreen() {
-  const {padding} = useDynamicLayout()
+  const renderItem = ({ item }) => {
+    switch (item.type) {
+      case "stories":
+        return <Stories />;
+      case "posts":
+        return <Posts />;
+      default:
+        return null;
+    }
+  };
+  const { padding } = useDynamicLayout();
   return (
-   <SafeAreaView  className='flex-1 space-y-2' style={{paddingHorizontal:padding}}>
-      <CustomHeader/>
-      
-        <Stories/>
-        <Posts/>
-      
-  
-   </SafeAreaView>
-  )
+    <SafeAreaView
+      className="flex-1 space-y-2"
+      style={{ paddingHorizontal: padding }}
+    >
+      {/* <CustomHeader/> */}
+      <FlatList
+        data={section}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        ListHeaderComponent={<CustomHeader />}
+        showsVerticalScrollIndicator={false}
+      />
+    </SafeAreaView>
+  );
 }

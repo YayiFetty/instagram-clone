@@ -10,7 +10,7 @@ type ImageUrlProps = {
 export default function DisplayPic({ imageDp }: ImageUrlProps) {
   const { widthS } = useDynamicLayout(); // Get dynamic width
 
-  const gradientSize = widthS * 0.5; // Outer container size
+  const gradientSize = widthS * 0.7; // Outer container size
   const innerContainerSize = gradientSize * 0.9; // Slightly smaller for the inner container
   const imageSize = innerContainerSize * 0.9; // Smaller size for the image container
 
