@@ -61,7 +61,7 @@ const useDynamicLayout = () => {
   const widthS = isSmallDevice 
     ? width * 0.3 
     : isMediumDevice 
-      ? width * 0.2 
+      ? width * 0.22 
       : isLargeDevice 
         ? width * 0.15 
         : width * 0.1;

@@ -151,7 +151,7 @@
 // export default PostsCard;
 
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useRef, useState } from "react";
 import PostHeader from "./PostHeader";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -160,8 +160,14 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Feather from "@expo/vector-icons/Feather";
 import DisplayPic from "../imagedp/DisplayPic";
 import SmallDp from "../imagedp/SmallDp";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import CommentB from "../Comment/CommentModal";
+import { useApp } from "@/src/context/appContext";
+import { Post } from "@/src/types/types";
+import CommentModal from "../Comment/CommentModal";
 
 export default function PostsCard({
+  id,
   imageDp,
   location,
   isVerified,
@@ -169,8 +175,31 @@ export default function PostsCard({
   mediaUrl,
   likes,
   likedBy,
-}) {
+}: Post) {
   const { iconSize } = useDynamicLayout();
+
+  const [comments, setComments] = useState([]);
+
+  const sheetRef = useRef<BottomSheetModal>(null);
+  // to open the modal
+  const openCommentModal = () => {
+    sheetRef.current?.present();
+  };
+  const modalClose = () => {
+    sheetRef.current?.dismiss();
+  };
+
+  const handleAddComment = (newComment: string) => {
+    const newCommentObj = {
+      id: String(comments.length + 1),
+      username: "currentUser", // Replace with actual username
+      text: newComment,
+      timestamp: "just now",
+      likes: 0,
+    };
+    setComments([...comments, newCommentObj]);
+  };
+
   return (
     <View className="flex-1 space-y-2">
       <PostHeader
@@ -191,7 +220,7 @@ export default function PostsCard({
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={openCommentModal}>
               <View className="flex flex-row items-center gap-1">
                 <FontAwesome5 name="comment" size={24} color="black" />
                 <Text>123</Text>
@@ -214,20 +243,25 @@ export default function PostsCard({
             {Array(3)
               .fill(null)
               .map((_, index) => (
-               <View key={index}  className={`absolute ${index === 0 ? "z-10" : ""} 
-               ${
-                index === 1 ? "z-20 left-2":""
-               } ${
-                index === 2 ? "z-30 left-4":""
-               }
-               `}>
-                 <SmallDp />
-               </View>
+                <View
+                  key={index}
+                  className={`absolute ${index === 0 ? "z-10" : ""} 
+               ${index === 1 ? "z-20 left-2" : ""} ${
+                    index === 2 ? "z-30 left-4" : ""
+                  }
+               `}
+                >
+                  <SmallDp />
+                </View>
               ))}
           </View>
-          <Text className="ml-7 text-sm text-gray-700" >Liked by {likedBy} and others</Text>
+          <Text className="ml-7 text-sm text-gray-700">
+            Liked by {likedBy} and others
+          </Text>
         </View>
       </View>
+
+      <CommentModal ref={sheetRef} postId={id} onClose={modalClose} />
     </View>
   );
 }

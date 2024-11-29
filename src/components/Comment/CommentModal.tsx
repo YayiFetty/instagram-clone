@@ -1,104 +1,137 @@
-import React, { useCallback, useRef, useMemo, useState } from "react"
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet"
-import CommentBox from "./CommentBox"
-import { useApp } from "@/src/context/appContext";
-import { Text, View } from "react-native";
 
-interface CommentModalProps {
-  isVisible: boolean
-  onClose: () => void;
-  postId:string;
- }
 
- interface Comment {
-  id: string;
-  username: string;
-  isVerified: boolean;
-  imageDp: string;
-  location: string;
-  likes: number;
-  content?: string;
-  timestamp?: string;
+// import React, { useMemo, useState } from "react";
+// import { View, Text } from "react-native";
+// import { GestureHandlerRootView } from "react-native-gesture-handler";
+// import {
+//   BottomSheetFlatList,
+//   BottomSheetModal,
+//   BottomSheetTextInput,
+// } from "@gorhom/bottom-sheet";
+// import Button from "../Button";
+
+// interface Comment {
+//   id: number;
+//   comment: string;
+// }
+
+// interface CommentBProps {
+//   ref: React.RefObject<BottomSheetModal>;
+//   onClose: () => void;
+//   onAddComment: (comment: string) => void;
+//   comments: Comment[];
+// }
+
+// const CommentB = React.forwardRef<BottomSheetModal, CommentBProps>(
+//   ({ onClose, onAddComment, comments }, ref) => {
+//     const snapPoints = useMemo(() => ["90%"], []);
+//     const [newComment, setNewComment] = useState("");
+
+//     const handlePostComment = () => {
+//       if (newComment.trim()) {
+//         onAddComment(newComment.trim());
+//         setNewComment("");
+//       }
+//     };
+
+//     const renderItem = ({ item }: { item: Comment }) => (
+//       <View className="py-3 border-b border-gray-300">
+//         <Text className="text-base text-gray-800">{item.comment}</Text>
+//       </View>
+//     );
+
+//     return (
+//       <GestureHandlerRootView className="flex-1">
+//         <BottomSheetModal
+//           ref={ref}
+//           index={0}
+//           snapPoints={snapPoints}
+//           enablePanDownToClose
+//           onDismiss={onClose}
+//         >
+//           {/* Comments List */}
+//           <BottomSheetFlatList
+//             data={comments}
+//             renderItem={renderItem}
+//             keyExtractor={(item) => item.id.toString()}
+//             contentContainerStyle={{ padding: 16 }}
+//           />
+
+//           {/* Add Comment Input */}
+//           <View className="flex-row items-center px-4 py-2 border-t border-gray-300">
+//             <BottomSheetTextInput
+//               className="flex-1 h-10 px-2 border border-gray-400 rounded-md"
+//               value={newComment}
+//               onChangeText={setNewComment}
+//               placeholder="Add a comment..."
+//             />
+//             <Button title="Post" onPress={handlePostComment} />
+//           </View>
+//         </BottomSheetModal>
+//       </GestureHandlerRootView>
+//     );
+//   }
+// );
+
+// export default CommentB;
+
+
+import { View, Text } from 'react-native'
+import React, { useCallback, useMemo } from 'react'
+import { BottomSheetFlatList, BottomSheetModal } from '@gorhom/bottom-sheet'
+import { useApp } from '@/src/context/appContext';
+import CommentBox from './CommentBox';
+
+interface Comment {
+    id: string;
+    username: string;
+    comment: string;
+    createdAt: string;
+    userProfilePic?: string; // Optional profile picture
 }
-const CommentModal: React.FC<CommentModalProps> = ({ isVisible, onClose, postId }) => {
-  const {posts, user } = useApp(); // Fetch user info from context
-  const sheetRef = useRef(null);
-  const snapPoints = useMemo(() => ["100%"], []);
 
-  const handleSheetChange = useCallback((index) => {
-    if (index === -1) onClose()
-  }, [onClose]);
+interface CommentProps {
+    onClose: () => void;
+    postId: string;
+}
 
+const CommentModal = React.forwardRef<BottomSheetModal, CommentProps>(({onClose, postId}, ref) => {
+    const snapPoints = useMemo(() => ["90%"], []);
+    const { posts } = useApp();
 
-  // Get comments for the current post
-  const post = posts.find(p => p.id === postId);
-  const [comments] = useState<Comment[]>([
-    // Example comment from the post author
-    {
-      id: '1',
-      username: post?.username || '',
-      isVerified: post?.isVerified || false,
-      imageDp: post?.imageDp || '',
-      location: post?.location || '',
-      likes: 0,
-      content: post?.caption,
-      timestamp: post?.createdAt
-    },
-    // You can add more mock comments here
-    {
-      id: '2',
-      username: 'john_doe',
-      isVerified: false,
-      imageDp: 'https://picsum.photos/100/100?random=2',
-      location: 'New York, USA',
-      likes: 5,
-      content: 'Great post!',
-      timestamp: new Date().toISOString()
-    }
-  ]);
+    // Find the specific post by its ID
+    const post = posts.find((p) => p.id === postId);
 
-  const renderItem = useCallback(
-    ({ item }: {item:Comment}) => {
-    
-      return (
-        <CommentBox
-          username={item.username } // Use username from comments or post
-          isVerified={item.isVerified} // Use isVerified from comments or post
-          imageDp={item.imageDp} // Use imageDp from comments or post
-          location={item.location} // Use location from comments or post
-          likes={item.likes}
-          onLikePress={() => console.log("Like pressed")}
-        />
-      );
-    },
-    [comments]
-  )
-
- 
-
-  return (
-    isVisible && (
-      <GestureHandlerRootView className="absolute inset-0 z-10">
-        <BottomSheet
-          ref={sheetRef}
-          snapPoints={snapPoints}
-          enablePanDownToClose
-          onChange={handleSheetChange}
-          index={0}
-          style={{ borderTopLeftRadius: 16, borderTopRightRadius: 16 }}
-        >
-         
-          <BottomSheetFlatList
-            data={comments}
-            keyExtractor={(item, index) => `comment-${index}`}
-            renderItem={renderItem}
-            contentContainerStyle={{ backgroundColor: "white", paddingHorizontal: 16 }}
+    const renderItem = useCallback(({item}: {item: Comment}) => {
+        return(
+            <CommentBox
+            username={item.username } // Use username from comments or post
+            
+            onLikePress={() => console.log("Like pressed")}
           />
-        </BottomSheet>
-      </GestureHandlerRootView>
+        )
+    }, []);
+
+    return (
+        <BottomSheetModal
+            ref={ref}
+            index={0}
+            snapPoints={snapPoints}
+            onDismiss={onClose}
+            enablePanDownToClose
+        >
+            <BottomSheetFlatList
+                data={post?.comments || []}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id.toString()}
+                ListEmptyComponent={() => (
+                    <View className="items-center justify-center p-4">
+                        <Text className="text-gray-500">No comments yet</Text>
+                    </View>
+                )}
+            />
+        </BottomSheetModal>
     )
-  )
-}
+})
 
 export default CommentModal

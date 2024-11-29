@@ -55,17 +55,25 @@
 //   );
 // }
 
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, ActivityIndicator } from 'react-native'
 import React, { useEffect } from 'react'
 import PostsCard from './PostsCard'
 import { useApp } from '@/src/context/appContext'
 
 export default function Posts() {
-  const {posts, fetchPosts} = useApp();
+  const {posts, loading, error, fetchPosts} = useApp();
 
   useEffect(() => {
   fetchPosts()
-  }, [])
+  }, []);
+
+  if(loading){
+    return<ActivityIndicator size="large"/>
+  }
+
+  if(error){
+    return<Text>Error loading posts: {error.message}</Text>
+  }
   const renderItem = ({item}) => {
     return <PostsCard {...item}/>
   }
